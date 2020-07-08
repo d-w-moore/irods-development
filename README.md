@@ -45,7 +45,7 @@ RUN ./ubuntu_irods_installer/install.sh -r 4
    ```
    5. Start the container via:
    ```
-   $ docker run -it run-irods
+   $ docker run --name my_irods -it run-irods
    ```
    6. **(In the docker container)** Test the database is ready: `service postgresql start && sudo su - postgres -c 'psql -c "\l"'`
 ```
@@ -92,6 +92,11 @@ irods@05875862c42b:~$ ils
 ```
 
    8. When ready to leave the container, there are two choices:
-      - `exit` or `<Ctrl-D>` to kill the container
-      - `<Ctrl-P> <Ctrl-Q>` to detach from the container
+      1. `exit` or `<Ctrl-D>` to kill the container
+        * subsequent restarts of the container will necessitate restarting the DB and irods servers:
+        ```
+        bash-shell-on-host:~/$ docker start -ia my_irods
+        root@05875862c42b:~# service postgresql restart ; service irods restart        
+        ```
+      1. `<Ctrl-P> <Ctrl-Q>` to detach from the container
    
