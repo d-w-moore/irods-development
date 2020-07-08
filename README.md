@@ -47,7 +47,7 @@ RUN ./ubuntu_irods_installer/install.sh -r 4
    ```
    $ docker run -it run-irods
    ```
-   6. **(In the docker container)** Test the database is ready:`service postgresql start && sudo su - postgres -c 'psql -c "\l"'`
+   6. **(In the docker container)** Test the database is ready: `service postgresql start && sudo su - postgres -c 'psql -c "\l"'`
 ```
 * Starting PostgreSQL 10 database server                                   [ OK ]
                             List of databases
