@@ -77,6 +77,7 @@ iRODS group [irods]:
 == 5 == Y
 ```
    This is the indication that an iRODS server is running live in the container.
+   
    7.Try a manual `iput` and `ils`:
 ```
 root@05875862c42b:~# su - irods
