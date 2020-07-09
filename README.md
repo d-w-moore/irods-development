@@ -98,9 +98,9 @@ irods@05875862c42b:~$ ils
       1. `<Ctrl-P> <Ctrl-Q>` to detach from the container
 
 
-__
-<A id="forcing_nano">*forcing nano:*</A>
-Below, a typical invocation of visudo if you have a favorite editor already installed, eg. suppose you or the administrator has installed `nano` for convenience (`sudo apt install nano`):
+---
+## Footnotes
+  * <A id="forcing_nano">*forcing nano:*</A> : Below is  a possible invocation of visudo if you have a favorite editor already installed, eg. suppose you or the administrator has installed `nano` for convenience (`sudo apt update; sudo apt install nano`):
 
 ```
 $ EDITOR=nano sudo --preserve-env=EDITOR visudo
