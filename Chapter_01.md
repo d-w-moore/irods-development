@@ -9,9 +9,11 @@
        (We'll need it now for installing Docker and git; and after a couple of chapters, for installing other
        software, such as docker-compose and python.)
 
-       To install Docker , follow the instructions on the docker.com website for your choice of platform.
+       The "missing package manager" [brew](https://docs.brew.sh/Installation) may be installed on Mac machines to offer access to many convenient extras, such as 'tig', 'fish', etc.
 
-       On Ubuntu Linux, for example you'll do the following:
+       For the purposes of the exercise in this first chapter, please install [docker](http://docs.docker.com) and [git](http://git-scm.com) instructions on the respective websites for choice of platform.
+       
+       On Ubuntu Linux, you can simply do the following:
        ```
        sudo apt update && sudo apt install git docker.io
        ```
