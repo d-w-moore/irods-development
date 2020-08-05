@@ -11,7 +11,7 @@ $ mkdir ~/github
 $ cd ~/github
 $ git clone http://github.com/irods/irods -b 4-2-stable --recursive
 $ git clone http://github.com/irods/irods_client_icommands -b 4-2-stable
-$ for x in irods_*/ ; do mkdir build__$x; done
+$ for x in irods*/ ; do mkdir build__$x; done
 ```
 
 The above commands checkout the source code repositories required to build the server.
