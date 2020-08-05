@@ -87,7 +87,7 @@
     ```
     We're now live with an iRODS server instance runnint inside the docker container.
    
-  * 7.Try a manual `iput` and `ils`:
+  * 7. Try a manual `iput` and `ils`:
     ```
     root@05875862c42b:~# su - irods
     irods@05875862c42b:~$ ils
