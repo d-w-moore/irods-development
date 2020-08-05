@@ -4,7 +4,7 @@
 
 ## Setting up
 
-  * 1. Login as an administrative user on a Windows, Mac, or Linux workstation (or VM).
+  * 1.Login as an administrative user on a Windows, Mac, or Linux workstation (or VM).
 
        (We'll need it now for installing Docker and git; and after a couple of chapters, for installing other
        software, such as docker-compose and python.)
@@ -31,11 +31,11 @@
 
 ## Configuring and running an iRODS server in Docker
    
-  * 1. In a directory `~/github` create a local copy of this repo.
+  * 1.In a directory `~/github` create a local copy of this repo.
        ```
        $ mkdir ~/github ; cd ~/github ; git clone http://github.com/d-w-moore/irods-development
        ```
-  * 2. The top level directory will include a `Dockerfile` containing:
+  * 2.The top level directory will include a `Dockerfile` containing:
        ```
        FROM ubuntu:18.04
        RUN apt update
@@ -45,15 +45,15 @@
        RUN ./ubuntu_irods_installer/install.sh --w='config-essentials create-db add-needed-runtime' 0
        RUN ./ubuntu_irods_installer/install.sh -r 4
        ```
-  * 3. `cd` to that top level directory and build the container for running iRODS from this `Dockerfile`
+  * 3.`cd` to that top level directory and build the container for running iRODS from this `Dockerfile`
     ```
     $ cd ~/github/irods-development ; docker build -t run-irods .
     ```
-  * 4. Start the container via:
+  * 4.Start the container via:
     ```
     $ docker run --name my_irods -it run-irods
     ```
-  * 5. **(In the docker container)** Test the database is ready: `service postgresql start && sudo su - postgres -c 'psql -c "\l"'`
+  * 5.**(In the docker container)** Test the database is ready: `service postgresql start && sudo su - postgres -c 'psql -c "\l"'`
     ```
     * Starting PostgreSQL 10 database server                                   [ OK ]
                                 List of databases
@@ -64,7 +64,7 @@
 
     (... ICAT's the essential but other DB's will be listed here ...)
     ```
-  * 6. **(In the docker container)** Issue the command: `./ubuntu_irods_installer/install.sh   5`
+  * 6.**(In the docker container)** Issue the command: `./ubuntu_irods_installer/install.sh   5`
 
     ```
     Warning: Hostname `05875862c42b` should be a fully qualified domain name.
@@ -87,7 +87,7 @@
     ```
     We're now live with an iRODS server instance runnint inside the docker container.
    
-  * 7. Try a manual `iput` and `ils`:
+  * 7.Try a manual `iput` and `ils`:
     ```
     root@05875862c42b:~# su - irods
     irods@05875862c42b:~$ ils
@@ -98,7 +98,7 @@
       VERSION.json
     ```
 
-  * 8. When ready to leave the container, there are two choices:
+  * 8.When ready to leave the container, there are two choices:
     - `exit` or `<Ctrl-D>` to kill the container
        * subsequent restarts of the container will necessitate restarting the DB and irods servers:
        ```
