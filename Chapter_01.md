@@ -11,7 +11,7 @@
 
        The "missing package manager" [brew](https://docs.brew.sh/Installation) may be installed on Mac machines to offer access to many convenient extras, such as 'tig', 'fish', etc.
 
-       For the purposes of the exercise in this first chapter, please install [docker](http://docs.docker.com) and [git](http://git-scm.com) instructions on the respective websites for choice of platform.
+       For the purposes of the exercise in this first chapter, please install [docker](http://docs.docker.com) and [git](http://git-scm.com) by clicking on the appropriate OS platform links on the respective websites.
        
        On Ubuntu Linux, you can simply do the following:
        ```
