@@ -21,12 +21,13 @@ The container already has iRODS externals packages installed, including:
 
 Now we build the server and partially install it (actually, the runtime component first):
 ```
-$ cd build__irods ; /opt/irods-externals/cmake3.11.4-0/bin/cmake -G Ninja
+$ cd build__irods && /opt/irods-externals/cmake3.11.4-0/bin/cmake -G Ninja ../irods
 $ ninja package
-$ ~/ubuntu_irods_installer/install.sh -C 4
+$ ~/ubuntu_irods_installer/install.sh -C --w=basic 4
 ```
 and then the icommands which will be instrumental to the server's testing upon installation:
 ```
-$ cd ../build__irods_client__icommands
-$ 
+$ cd ../build__irods_client_icommands && /opt/irods-externals/cmake3.11.4-0/bin/cmake -G Ninja ../irods_client_icommands
+$ ninja package
+$ ~/ubuntu_irods_installer/install.sh -C --w=basic-skip 4 5
 ```
