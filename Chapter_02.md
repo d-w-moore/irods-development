@@ -23,6 +23,8 @@ from source if required.)
 
 Also installed is the ninja builder, a `make` substitute optimized for running independed parts of a build in parallel.
 
+## Build step
+
 In the next step, we build the server packages and build the runtime and development components.
 
   - 1a
