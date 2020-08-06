@@ -111,7 +111,7 @@
 
 ## Tips and Tricks
 
-### Passwordless sudo
+### Password-less sudo
 
 In the above exercise, we run as the root user, using a 'robot' script `install.sh` designed to automate the
 process of installing packages whether remote (in a well known repository) or local (downloaded or built by the user).
@@ -129,6 +129,8 @@ change to reflect your own login name):
 ```
   ubuntu ALL=(ALL) NOPASSWD: ALL
 ```
+
+### Package Management Commands
 
 It will also help to have some familiarity with the package management commands of the operating system; in
 Ubuntu's case that would be the Debian command line utilities `dpkg` (installs/deinstalls .deb files) and
