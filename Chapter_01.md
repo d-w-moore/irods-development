@@ -162,3 +162,14 @@ apt-cache search pattern.\*     # uses the regex pattern to search configured re
 NOTE: Usually the `apt` command will suffice as an abbreviated stand-in for the `apt-get` command.
 
 ```
+
+## Exercises - On to CentOS 7
+
+- A.  Clone another git repository that (again under Docker) installs a single node iRODS server, but this time on a different distribution of Linux: CentOS 7
+     Following the instructions in the first part of the README,
+  * 1. Build and  runn the Docker container
+  * 2. Verify you can interact with the iRODS server functions once inside the container.
+
+1B.  Extra Credit. This exercise shows more detail in terms of what is necessary to build and install within one Dockerfile.
+  * 1. Following the instructions in the second part of the README , build a new Docker container
+  * 2. Examine the Dockerfile.in-build-install
