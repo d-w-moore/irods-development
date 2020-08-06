@@ -120,14 +120,14 @@ If there is a choice, it may be convenient to run as a non-root user with "passw
 achieved using the following command line (assuming nano is your preferred editor):
 
 ```
-  # (sudo) env EDITOR=nano visudo
+#(sudo) env EDITOR=nano visudo
 ```
 
-While in the editor, append the following line to the sudoers file (assuming a sudo-enabled login of `ubuntu`;
+While in the editor, append the following line to the sudoers file (assuming a user called `ubuntu`);
 change to reflect your own login name):
 
 ```
-  ubuntu ALL=(ALL) NOPASSWD: ALL
+ubuntu ALL=(ALL) NOPASSWD: ALL
 ```
 
 ### Package Management Commands
