@@ -4,32 +4,35 @@
 
 ## Setting up
 
-  * 1.Login as an administrative user on a Windows, Mac, or Linux workstation (or VM).
+  * 1.Log in as an administrative user on a Windows, Mac, or Linux workstation (or VM).
 
-       (We'll need it now for installing Docker and git; and after a couple of chapters, for installing other
-       software, such as docker-compose and python.)
+    (We'll need the admin access for installing software, such as (in this chapter) Docker and git -- and, later on, docker-compose and python.)
 
-       The "missing package manager" [brew](https://docs.brew.sh/Installation) may be installed on Mac machines to offer access to many convenient extras, such as 'tig', 'fish', etc.
+    The "missing package manager" [Homebrew](https://docs.brew.sh/Installation) may be installed on Mac machines to offer access to many convenient extras, such as 'tig', 'fish', etc.
 
-       For the purposes of the exercise in this first chapter, please install [docker](http://docs.docker.com) and [git](http://git-scm.com) by clicking on the appropriate OS platform links on the respective websites.
+       For the purposes of the exercise in this first chapter, please install [docker](http://docs.docker.com) and [git](http://git-scm.com) by following the the appropriate OS platform links on the respective websites.
 
-       On Ubuntu Linux, you can simply do the following:
+       Of course, on Ubuntu Linux, you can simply do the following:
        ```
        sudo apt update && sudo apt install git docker.io
        ```
-       and will then need to adjust permissions for your login account to have `docker` daemon access:
+       and then will only need to adjust permissions for your login account to have `docker` daemon access:
        ```
        sudo usermod -aG docker [username]
        ```
-       Then log out and back in again. (Reboot if this is insufficient.)
-       You'll know docker is properly configured when you can run the following
-       command without error :
+       You will have to log out fully, and log back in again.  It's likely this will be sufficient; but if not, reboot the machine.
+       
+       You'll know docker is properly configured when you can run the following command without error :
        ```
        $ docker ps
        ```
 ---
 
 ## Configuring and running an iRODS server in Docker
+
+The docker container will use a "robot" install script from this repository `install.sh` (from [here](http://github.com/d-w-moore/ubuntu_irods_installer)) designed to automate the
+process of installing iRODS software packages whether remote (from an Internet repository) or local (e.g., built by the user).
+
 
   * 1.In a directory `~/github` create a local copy of this repo.
        ```
@@ -53,7 +56,12 @@
     ```
     $ docker run --name my_irods -it run-irods
     ```
-  * 5.**(In the docker container)** Test the database is ready: `service postgresql start && sudo su - postgres -c 'psql -c "\l"'`
+  * 5.**(In the docker container)** Start the PostgreSQL database server and test it is ready:  
+    ```
+    $ service postgresql start && sudo su - postgres -c 'psql -c "\l"'
+    ```
+    This should produce a listing such as the one below; the ICAT database must exist (and be empty) at this point
+    to support object cataloguing operations by the iRODS server as it is configured and as it runs.
     ```
     * Starting PostgreSQL 10 database server                                   [ OK ]
                                 List of databases
@@ -85,7 +93,7 @@
 
     == 5 == Y
     ```
-    We're now live with an iRODS server instance runnint inside the docker container.
+    We're now live with an iRODS server instance running inside the docker container.
    
   * 7.Try a manual `iput` and `ils`:
     ```
@@ -113,11 +121,9 @@
 
 ### Password-less sudo
 
-In the above exercise, we run as the root user, using a 'robot' script `install.sh` designed to automate the
-process of installing packages whether remote (in a well known repository) or local (downloaded or built by the user).
-
-If there is a choice, it may be convenient to run as a non-root user with "passwordless" sudo access. This can be
-achieved using the following command line (assuming nano is your preferred editor):
+In the above exercise, we run as the root user, but if there is a choice, it will be more convenient and probably safer
+to run as a non-root user with "passwordless" sudo access to cover any adminstrative commands required in the container.
+This can be achieved using the following command line (assuming nano is your preferred editor):
 
 ```
 #(sudo) env EDITOR=nano visudo
@@ -143,10 +149,11 @@ complete list of Ubuntu  package commands and options):
 dpkg
          -i PKGFILE     # install from a .DEB pkgfile
 
-         -c PKGFILE     # list component file from a .DEB pkgfile
+         -c PKGFILE     # list component files that would be installed from a .DEB pkgfile
 
          -l PATTERN\*   # list installed packages with names conforming to PATTERN
-
+                        #   ('ii'  in the first two columns denotes a package properly and completely installed)
+                        
          -r PACKAGE     # remove the installed PACKAGE
 
          -L PACKAGE     # print the list of file paths make up the installed PACKAGE
@@ -165,11 +172,21 @@ NOTE: Usually the `apt` command will suffice as an abbreviated stand-in for the 
 
 ## Exercises - On to CentOS 7
 
-- A.  Clone another git repository that (again under Docker) installs a single node iRODS server, but this time on a different distribution of Linux: CentOS 7
+1A.  Clone another git repository :
+      ```
+      $ git clone http://github.com/d-w-moore/c7irods
+      ```
+     The aim will be (again under Docker) to install a single node iRODS server, but this time on a different distribution of Linux: CentOS 7
      Following the instructions in the first part of the README,
   * 1. Build and  runn the Docker container
   * 2. Verify you can interact with the iRODS server functions once inside the container.
 
 1B.  Extra Credit. This exercise shows more detail in terms of what is necessary to build and install within one Dockerfile.
-  * 1. Following the instructions in the second part of the README , build a new Docker container
-  * 2. Examine the Dockerfile.in-build-install
+  * 1. Following the instructions in the second part of the `c7irods` repository README , build a new Docker container
+  * 2. Examine the `Dockerfile.in-build-install`.   It directly implements the stages of a from-scratch iRODS installation per 
+        [directions](https://docs.irods.org/4.2.8/getting_started/installation/) given by the iRODS website , including adding the package repository  and creating the ICAT database and iRODS database user.
+  * 3. Within the same directory this Dockerfile is a sample run of the just-built container, in `session.md`. Echo the commands given 
+       in that sample session, and observe the console messages
+       printed on your display.  Note that during the build, iRODS was installed under a different Docker layer from the one
+       presently running, thus we had to force the hostname for the running container to be the same as the one stored  by the build process in '/tmp/hostname' ! This peculiar liability of the Docker build process is one disadvantage of an all-in-one install -- and the main reason why , in this tutorial guide, we will mostly adhere to a strategy of
+       installing iRODS during the container run phase rather than the build phase.
